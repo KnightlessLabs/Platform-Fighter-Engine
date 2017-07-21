@@ -1,7 +1,6 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Director;
 using TrueSync;
 
 [System.Serializable]
@@ -13,13 +12,14 @@ public class DashState : BaseAction {
         base.ActionStart();
         ActionTimerDuration = Con.CI.AttributesInfo.DashFrames;
         Con.Anim.PlayAnimation(Con.CI.CombatStances[0].BasicMoves.Dash.Animation, true);
+        CurrentActionTime = 1;
     }
 
     public override void ActionUpdate () {
         if (!ActionInterrupt()) {
             if (CurrentActionTime == 2) {
                 TSVector temp = Con.Rigid.velocity;
-                temp.x += Con.CI.AttributesInfo.DashInitialVelocity * Con.FaceDirection;
+                temp.x = Con.CI.AttributesInfo.DashInitialVelocity * Con.FaceDirection;
                 if(TSMath.Abs(temp.x) > Con.CI.AttributesInfo.DashSpeed) {
                     temp.x = Con.CI.AttributesInfo.DashSpeed * Con.FaceDirection;
                 }
@@ -27,34 +27,35 @@ public class DashState : BaseAction {
                 Con.Rigid.velocity = temp;
             }
 
-            if(TSMath.Abs(Con.LeftStick.x) < 0.3f) {
-                Con.ReduceByTraction(false);
-            } else {
-                TSVector temp = Con.Rigid.velocity;
-                temp.y = 0;
-                FP tempMax = Con.LeftStick.x * Con.CI.AttributesInfo.DashSpeed;
-                FP tempAcceleration = Con.LeftStick.x * Con.CI.AttributesInfo.DashRunAcceleration;
-
-
-                temp.x += tempAcceleration;
-                Con.Rigid.velocity = temp;
-                if ((tempMax > 0 && temp.x > tempMax) || (tempMax < 0 && temp.x < tempMax)) {
+            if (CurrentActionTime > 2) {
+                if (TSMath.Abs(Con.LeftStick.x) < 0.3f) {
                     Con.ReduceByTraction(false);
-                    if ((tempMax > 0 && temp.x < tempMax) || (tempMax < 0 && temp.x > tempMax)) {
-                        temp.x = tempMax;
-                    }
-                    Con.Rigid.velocity = temp;
                 } else {
+                    TSVector temp = Con.Rigid.velocity;
+                    temp.y = 0;
+                    FP tempMax = Con.LeftStick.x * Con.CI.AttributesInfo.DashSpeed;
+                    FP tempAcceleration = Con.LeftStick.x * Con.CI.AttributesInfo.DashRunAcceleration;
+
+
                     temp.x += tempAcceleration;
-                    if ((tempMax > 0 && temp.x > tempMax) || (tempMax < 0 && temp.x < tempMax)) {
-                        temp.x = tempMax;
-                    }
                     Con.Rigid.velocity = temp;
+                    if (( tempMax > 0 && temp.x > tempMax ) || ( tempMax < 0 && temp.x < tempMax )) {
+                        Con.ReduceByTraction(false);
+                        if (( tempMax > 0 && temp.x < tempMax ) || ( tempMax < 0 && temp.x > tempMax )) {
+                            temp.x = tempMax;
+                        }
+                        Con.Rigid.velocity = temp;
+                    } else {
+                        temp.x += tempAcceleration;
+                        if (( tempMax > 0 && temp.x > tempMax ) || ( tempMax < 0 && temp.x < tempMax )) {
+                            temp.x = tempMax;
+                        }
+                        Con.Rigid.velocity = temp;
+                    }
                 }
             }
-
-            CurrentActionTime++;
         }
+        CurrentActionTime++;
     }
 
     public override bool ActionInterrupt () {

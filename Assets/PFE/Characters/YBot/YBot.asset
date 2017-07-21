@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: YBot
   m_EditorClassIdentifier: 
   Name: YBot
-  BigPortrait: {fileID: 0}
+  BigPortrait: {fileID: 21300000, guid: f9c4598604c81bb43ac317b6a5b4fa97, type: 3}
   SmallPortrait: {fileID: 0}
   CSSPortrait: {fileID: 0}
   StockIcon: {fileID: 0}
@@ -25,23 +25,24 @@ MonoBehaviour:
     Hurtboxes: []
   AttributesInfo:
     Weight: 100
-    Gravity: 0.75
-    WalkInitialVelocity: 0.2
+    Gravity: 3
+    WalkInitialVelocity: 1
     WalkAcceleration: 0.2
-    WalkSpeed: 2
-    DashInitialVelocity: 7
-    DashRunAcceleration: 0.17
-    DashRunDeceleration: 0.1
-    DashSpeed: 5
-    RunMaxVelo: 5
+    minWalkSpeed: 3
+    WalkSpeed: 5
+    DashInitialVelocity: 3
+    DashRunAcceleration: 0.75
+    DashRunDeceleration: 0.25
+    DashSpeed: 8
+    RunMaxVelo: 9
     AirSpeed: 1.15
-    MaxFallSpeed: 4
+    MaxFallSpeed: 19
     FastFallSpeed: 2.4
     AirAcceleration: 0.07
     AirDeceleration: 0.01
     AirFriction: 0.015
     JumpVelo:
-      _serializedValue: 10737418240
+      _serializedValue: 25769803776
     GroundToAir:
       _serializedValue: 3435973888
     MaxJumps: 2
@@ -50,13 +51,13 @@ MonoBehaviour:
     Crouch: 0
     Crawl: 0
     Tether: 0
-    DashDanceWindow: 27
-    DashFrames: 27
+    DashDanceWindow: 18
+    DashFrames: 18
     JumpSquat: 5
-    JumpFrameTime: 45
+    JumpFrameTime: 25
     SoftLandingLag: 2
     HardLandingLag: 4
-    Traction: 0.145
+    Traction: 0.25
     ShieldSize: 9.702
   ExecutionTiming: 0.3
   BlendingDuration: 0.1

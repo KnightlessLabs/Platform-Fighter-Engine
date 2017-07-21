@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TrueSync;
@@ -56,6 +56,7 @@ public class AttributesHolder {
     public float Gravity;
     public float WalkInitialVelocity;
     public float WalkAcceleration;
+    public float minWalkSpeed;
     public float WalkSpeed;
     public float DashInitialVelocity;
     public float DashRunAcceleration;

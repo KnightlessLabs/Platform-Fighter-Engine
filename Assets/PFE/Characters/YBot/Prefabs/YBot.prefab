@@ -656,6 +656,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1292615283338612
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4943136169667960}
+  - component: {fileID: 114865204710635940}
+  - component: {fileID: 114319626063981020}
+  m_Layer: 8
+  m_Name: Ledge Grab Box
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1294213482704404
 GameObject:
   m_ObjectHideFlags: 1
@@ -4100,15 +4117,16 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1844315744262230}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.28, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4882745933254092}
   - {fileID: 4070505424989022}
+  - {fileID: 4943136169667960}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4707440389286774
 Transform:
   m_ObjectHideFlags: 1
@@ -4607,6 +4625,19 @@ Transform:
   m_Father: {fileID: 4098401800095522}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4943136169667960
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1292615283338612}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4705295113488122}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4945734259926096
 Transform:
   m_ObjectHideFlags: 1
@@ -4813,6 +4844,43 @@ MonoBehaviour:
   localOwner:
     id: 0
     name: 
+--- !u!114 &114319626063981020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1292615283338612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df3e4ecc2c78eaa409dad488c230d65d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _position:
+    x:
+      _serializedValue: 0
+    y:
+      _serializedValue: 5497558016
+    z:
+      _serializedValue: 0
+  _rotation:
+    x:
+      _serializedValue: 0
+    y:
+      _serializedValue: 0
+    z:
+      _serializedValue: 0
+    w:
+      _serializedValue: 4294967296
+  _scale:
+    x:
+      _serializedValue: 4294967296
+    y:
+      _serializedValue: 4294967296
+    z:
+      _serializedValue: 4294967296
+  _serialized: 1
+  tsCollider: {fileID: 0}
+  tsParent: {fileID: 0}
 --- !u!114 &114474559722668320
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4849,11 +4917,11 @@ MonoBehaviour:
       _serializedValue: 0
   lossyScale:
     x:
-      _serializedValue: 4294968320
+      _serializedValue: 4294967296
     y:
       _serializedValue: 4294967296
     z:
-      _serializedValue: 4294968320
+      _serializedValue: 4294967296
   tsTransform: {fileID: 114532596072788100}
   _size: {x: 1, y: 1.5, z: 0.5}
 --- !u!114 &114532596072788100
@@ -4878,11 +4946,11 @@ MonoBehaviour:
     x:
       _serializedValue: 0
     y:
-      _serializedValue: 3037000704
+      _serializedValue: 0
     z:
       _serializedValue: 0
     w:
-      _serializedValue: 3037000704
+      _serializedValue: 4294967296
   _scale:
     x:
       _serializedValue: 4294967296
@@ -4971,6 +5039,35 @@ MonoBehaviour:
     _serializedValue: 214748368
   interpolation: 0
   _constraints: 120
+--- !u!114 &114865204710635940
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1292615283338612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2761f79677a73b84cbeba46eda8c3766, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTrigger: 1
+  tsMaterial: {fileID: 0}
+  center:
+    x:
+      _serializedValue: 2147483648
+    y:
+      _serializedValue: 5368709120
+    z:
+      _serializedValue: 0
+  lossyScale:
+    x:
+      _serializedValue: 4294967296
+    y:
+      _serializedValue: 4294967296
+    z:
+      _serializedValue: 4294967296
+  tsTransform: {fileID: 114319626063981020}
+  _size: {x: 1.5, y: 1, z: 1}
 --- !u!137 &137528393700933150
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

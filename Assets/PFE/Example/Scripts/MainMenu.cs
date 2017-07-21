@@ -1,7 +1,8 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon;
+using InControl;
 
 public class MainMenu : Photon.MonoBehaviour{
 
@@ -10,7 +11,8 @@ public class MainMenu : Photon.MonoBehaviour{
     public GameObject OnlineVSGO;
     public GameObject CharacterSelectGO;
     public CSSInfo CSSInfoHolder;
-    public CSSCharacterUI[] CurrentSelectedCharacter;
+    public List<InputDevice> PlayerControllers = new List<InputDevice>();
+    public CSSCursor CursorPrefab;
 
     [System.Serializable]
     public class CSSInfo {
@@ -18,6 +20,7 @@ public class MainMenu : Photon.MonoBehaviour{
         public Transform CSSCharactersParent;
         public CSSCharacterUI CSSCharacterTemplate;
         public CSSPanelUI[] PlayerPanels;
+        public List<CSSCursor> Cursors = new List<CSSCursor>();
     }
 
     private void Awake () {
@@ -36,13 +39,39 @@ public class MainMenu : Photon.MonoBehaviour{
         }
     }
 
-    private void Update () {
+    void Update () {
+        switch (GameManager.instance.GameS) {
+            case GameState.MainMenu:
+                break;
+            case GameState.CharacterSelection:
+                if (InputManager.ActiveDevice.AnyButton) {
+                    if (!PlayerControllers.Contains(InputManager.ActiveDevice)) {
+                        PlayerControllers.Add(InputManager.ActiveDevice);
+                        GameObject temp = GameObject.Instantiate(CursorPrefab.gameObject, CSSInfoHolder.CSSParent);
+                        temp.GetComponent<CSSCursor>().Controller = InputManager.ActiveDevice;
+                        CSSInfoHolder.Cursors.Add(temp.GetComponent<CSSCursor>());
+                    }
+                }
+                if (InputManager.ActiveDevice.MenuWasPressed) {
+                    PhotonNetwork.LoadLevel("BattleArena");
+                }
+                break;
+        }
     }
 
+    #region Buttons
     //Local
     public void LocalMatchButton () {
         PhotonNetwork.offlineMode = true;
         PhotonNetwork.CreateRoom("LocalMatch");
+        GameManager.instance.GameS = GameState.CharacterSelection;
+    }
+
+    public void TrainingModeButton () {
+        PhotonNetwork.offlineMode = true;
+        PhotonNetwork.CreateRoom("LocalMatch");
+        GameManager.instance.GameS = GameState.CharacterSelection;
+        PhotonNetwork.LoadLevel("BattleArena");
     }
 
     //Online
@@ -59,10 +88,12 @@ public class MainMenu : Photon.MonoBehaviour{
         MainMenuGO.SetActive(true);
         OnlineVSGO.SetActive(false);
         CharacterSelectGO.SetActive(false);
+        GameManager.instance.GameS = GameState.MainMenu;
     }
 
     public void CreateRoom () {
         PhotonNetwork.CreateRoom("Random Lobby" + Random.Range(0, 999));
+        GameManager.instance.GameS = GameState.CharacterSelection;
     }
 
     public void JoinRandomRoom () {
@@ -95,5 +126,7 @@ public class MainMenu : Photon.MonoBehaviour{
             OnlineVSGO.SetActive(true);
             CharacterSelectGO.SetActive(false);
         }
+        GameManager.instance.GameS = GameState.MainMenu;
     }
+    #endregion
 }

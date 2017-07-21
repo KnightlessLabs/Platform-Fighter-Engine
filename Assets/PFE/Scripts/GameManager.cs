@@ -10,11 +10,10 @@ public class GameManager : TrueSyncBehaviour {
     public MatchState MatchS;
     public GameInfo GInfo;
     public VCR Recorder;
-    public List<CInput> Players = new List<CInput>();
     public bool TapJump = false; //Tap jump on/off
-    public List<CharacterInfo> PlayerCharacters = new List<CharacterInfo>(); //Support multiple players on same game
 
-    public int PlayerNumber = 0; //Used online
+    public List<CInput> Players = new List<CInput>();
+    public CharacterInfo[] PlayerCharacters = new CharacterInfo[4]; //Support multiple players on same game
 
     void Start () {
         DontDestroyOnLoad(gameObject);
@@ -26,12 +25,14 @@ public class GameManager : TrueSyncBehaviour {
 
         if (PhotonNetwork.inRoom) {
             if (PhotonNetwork.offlineMode) {
-                for (int i = 0; i < PlayerCharacters.Count; i++) {
-                    TrueSyncManager.SyncedInstantiate(PlayerCharacters[i].Costumes[0], StageInfo.Instance.SpawnPoints[0].position, TSQuaternion.identity);
+                for (int i = 0; i < PlayerCharacters.Length; i++) {
+                    if (PlayerCharacters[i] != null) {
+                        TrueSyncManager.SyncedInstantiate(PlayerCharacters[i].Costumes[0], StageInfo.Instance.SpawnPoints[i].position, TSQuaternion.identity);
+                    }
                 }
             } else {
-                for (int i = 0; i < PlayerCharacters.Count; i++) {
-                    TrueSyncManager.SyncedInstantiate(PlayerCharacters[i].Costumes[0], StageInfo.Instance.SpawnPoints[PlayerNumber].position, TSQuaternion.identity);
+                for (int i = 0; i < PlayerCharacters.Length; i++) {
+                    TrueSyncManager.SyncedInstantiate(PlayerCharacters[i].Costumes[0], StageInfo.Instance.SpawnPoints[0].position, TSQuaternion.identity);
                 }
             }
         }

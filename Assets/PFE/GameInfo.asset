@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Name: GameInfo
   m_EditorClassIdentifier: 
   BufferWindow: 10
-  WalkSensitivity: 0.18
-  TurnSensitivity: 0.25
-  DashSensitivity: 0.83
-  CrouchSensitivity: -0.66
+  WalkSensitivity: 0.04
+  TurnSensitivity: 0.07
+  DashSensitivity: 0.4
+  CrouchSensitivity: -0.26
   JumpSensitivity: 0.66
   Deadzone: 0.1
   Characters:

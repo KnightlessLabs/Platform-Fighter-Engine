@@ -1,7 +1,6 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Director;
 using TrueSync;
 
 [System.Serializable]
@@ -25,6 +24,7 @@ public class JumpState : BaseAction {
 
     public override void ActionUpdate () {
         if (!ActionInterrupt()) {
+            Con.ApplyGravity();
             CurrentActionTime++;
         }
     }

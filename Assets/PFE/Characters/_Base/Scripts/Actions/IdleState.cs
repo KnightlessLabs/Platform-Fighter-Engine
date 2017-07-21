@@ -1,7 +1,6 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Director;
 using TrueSync;
 
 [System.Serializable]
@@ -41,7 +40,7 @@ public class IdleState : BaseAction {
                 return true;
             }
         } else if(Con.FaceDirection == -1) { //Facing left
-            if (Con.GetLeftStick(0).x * Con.FaceDirection > 0.79f && Con.GetLeftStick(2).x * Con.FaceDirection < 0.3 && Con.GetLeftStick(2).x != 0) {
+            if (Con.GetLeftStick(0).x * Con.FaceDirection > GameManager.instance.GInfo.DashSensitivity && Con.GetLeftStick(2).x * Con.FaceDirection < 0.3 && Con.GetLeftStick(2).x != 0) {
                 Con.ChangeState("Dash");
                 return true;
             } else if (Con.LeftStick.x <= -GameManager.instance.GInfo.WalkSensitivity) {

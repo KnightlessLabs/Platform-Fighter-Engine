@@ -61,7 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.059850782, g: 0.9044118, b: 0.9044118, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41b86b028d282b94799727fca1bd6857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CSSPanelNumber: 0
   CurrentState: 0
   ChipButton: {fileID: 114636305349160516}
   ChipText: {fileID: 114907342782110944}

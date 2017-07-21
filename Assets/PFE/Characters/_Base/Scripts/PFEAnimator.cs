@@ -1,7 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Director;
+using UnityEngine.Animations;
+using UnityEngine.Playables;
+
 
 public class PFEAnimator : MonoBehaviour {
 
@@ -9,32 +11,44 @@ public class PFEAnimator : MonoBehaviour {
 
     //Playable API
     public PlayableGraph playableGraph;
-    public PlayableHandle playableHandle;
     public float CurrentAnimationTimeline = 0.0f;
     public bool AnimStarted = false;
 
-    public void Awake () {
-    }
-
-    public void PlayAnimation (AnimationClip clip, bool AutoPlay) {
+    public void PlayAnimation ( AnimationClip clip, bool AutoPlay ) {
         if (clip != null) {
             if (AnimStarted) {
-                playableHandle.Destroy();
                 playableGraph.Destroy();
             }
-            playableHandle = AnimationPlayableUtilities.PlayClip(Anim, clip, out playableGraph);
-            if (!AutoPlay) {
-                playableHandle.playState = PlayState.Paused;
-            }
+            Anim.speed = 1;
+            AnimationPlayableUtilities.PlayClip(Anim, clip, out playableGraph);
             AnimStarted = true;
         } else {
             if (AnimStarted) {
-                playableHandle.Destroy();
                 playableGraph.Destroy();
             }
         }
     }
 
-    public void Update () {
+    public void PlayAnimation ( AnimationClip clip, bool AutoPlay, float Speed ) {
+        if (clip != null) {
+            if (AnimStarted) {
+                playableGraph.Destroy();
+            }
+            AnimationClipPlayable pp = AnimationPlayableUtilities.PlayClip(Anim, clip, out playableGraph);
+            pp.SetSpeed(Speed);
+            AnimStarted = true;
+        } else {
+            if (AnimStarted) {
+                playableGraph.Destroy();
+            }
+        }
+    }
+
+    public void PauseAnimation () {
+        playableGraph.Stop();
+    }
+
+    public void PlayAnimation () {
+        playableGraph.Play();
     }
 }

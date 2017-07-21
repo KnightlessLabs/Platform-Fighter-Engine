@@ -1,7 +1,6 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Director;
 using TrueSync;
 
 [System.Serializable]
@@ -23,6 +22,7 @@ public class WalkState : BaseAction {
             Con.ApplyGravity();
 
             FP tempMax = Con.CI.AttributesInfo.WalkSpeed * Con.GetLeftStick(0).x;
+            FP tempMin = Con.CI.AttributesInfo.minWalkSpeed * (Con.GetLeftStick(0).x > 0 ? 1 : -1);
 
             if (TSMath.Abs(Con.Rigid.velocity.x) > TSMath.Abs(tempMax)) {
                 Con.ReduceByTraction(true);
@@ -33,6 +33,9 @@ public class WalkState : BaseAction {
                 temp.x += tempAcceleration;
                 if (temp.x * Con.FaceDirection > tempMax * Con.FaceDirection) {
                     temp.x = tempMax;
+                }
+                if(temp.x * Con.FaceDirection < tempMin * Con.FaceDirection) {
+                    temp.x = tempMin;
                 }
                 Con.Rigid.velocity = temp;
             }
@@ -46,7 +49,7 @@ public class WalkState : BaseAction {
         } else if (Con.CheckForJump()) {
             Con.ChangeState("JumpSquat");
             return true;
-        } else if (Con.LeftStick.y <= -0.66f) {
+        } else if (Con.LeftStick.y <= GameManager.instance.GInfo.CrouchSensitivity) {
             Con.ChangeState("Crouch");
             return true;
         } else if (Con.FaceDirection == 1) {
@@ -56,7 +59,7 @@ public class WalkState : BaseAction {
             } else if (Con.LeftStick.x <= -.25f) {
                 Con.ChangeState("Turn");
                 return true;
-            } else if (TSMath.Abs(Con.LeftStick.x) < .18f) {
+            } else if (TSMath.Abs(Con.LeftStick.x) < GameManager.instance.GInfo.WalkSensitivity) {
                 Con.ChangeState("Idle");
                 return true;
             }
@@ -67,7 +70,7 @@ public class WalkState : BaseAction {
             } else if (Con.LeftStick.x >= .25f) {
                 Con.ChangeState("Turn");
                 return true;
-            } else if (TSMath.Abs(Con.LeftStick.x) < .18f) {
+            } else if (TSMath.Abs(Con.LeftStick.x) < GameManager.instance.GInfo.WalkSensitivity) {
                 Con.ChangeState("Idle");
                 return true;
             }

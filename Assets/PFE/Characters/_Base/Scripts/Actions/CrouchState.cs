@@ -1,7 +1,6 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Director;
 using TrueSync;
 
 [System.Serializable]
@@ -25,7 +24,7 @@ public class CrouchState : BaseAction {
                 if (Con.LeftStick.x >= 0.83f && Con.GetLeftStick(1).x <= .35f) {
                     Con.ChangeState("Dash");
                     return true;
-                } else if (Con.LeftStick.x >= 0.18f) {
+                } else if (Con.LeftStick.x >= GameManager.instance.GInfo.WalkSensitivity) {
                     Con.ChangeState("Walk");
                     return true;
                 } else if (Con.LeftStick.x <= -.25f) {
@@ -39,7 +38,7 @@ public class CrouchState : BaseAction {
                 if (Con.LeftStick.x <= -0.83f && Con.GetLeftStick(1).x >= -.35f) {
                     Con.ChangeState("Dash");
                     return true;
-                } else if (Con.LeftStick.x <= -0.18f) {
+                } else if (Con.LeftStick.x <= -GameManager.instance.GInfo.WalkSensitivity) {
                     Con.ChangeState("Walk");
                     return true;
                 } else if (Con.LeftStick.x >= .25f) {

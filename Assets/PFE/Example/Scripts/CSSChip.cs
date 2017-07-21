@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using InControl;
 
 public class CSSChip : MonoBehaviour {
 
@@ -19,14 +20,7 @@ public class CSSChip : MonoBehaviour {
         ChipButton.onClick.RemoveAllListeners();
     }
 
-    void Update () {
-        if (GetComponent<PhotonView>().isMine) {
-            if (CurrentState == 1) {
-                transform.position = Input.mousePosition;
-            }
-        }
-    }
-
+    //Pick up/drop chip
     public void ChangeState () {
         CurrentState = CurrentState == 0 ? 1 : 0;
     }
