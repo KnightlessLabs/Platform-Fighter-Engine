@@ -25,7 +25,7 @@ public class IdleState : BaseAction {
         } else if (Con.CheckForJump()) {
             Con.ChangeState("JumpSquat");
             return true;
-        }else if (Con.LeftStick.y <= GameManager.instance.GInfo.CrouchSensitivity) {
+        }else if (Con.LeftStick.y < GameManager.instance.GInfo.CrouchSensitivity) {
             Con.ChangeState("Crouch");
             return true;
         } else if (Con.FaceDirection == 1) { //Facing right

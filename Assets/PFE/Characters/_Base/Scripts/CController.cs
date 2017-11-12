@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TrueSync;
@@ -39,7 +39,8 @@ public class CController : CMachine {
     }
 
     void OnGUI () {
-        GUI.TextArea(new Rect(0, 0, 400, 75), "Current State: " + CurrentState.Name);
-        GUI.TextArea(new Rect(0, 80, 400, 75), CurrentState.CurrentActionTime + "/" + CurrentState.ActionTimerDuration);
+        GUI.color = Color.red;
+        GUI.Label(new Rect(0, 0, 400, 75), "Current State: " + CurrentState.Name);
+        GUI.Label(new Rect(0, 80, 400, 75), CurrentState.CurrentActionTime + "/" + CurrentState.ActionTimerDuration);
     }
 }

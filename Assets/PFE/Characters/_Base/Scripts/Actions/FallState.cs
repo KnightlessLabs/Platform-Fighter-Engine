@@ -17,12 +17,18 @@ public class FallState : BaseAction {
     public override void ActionUpdate () {
         if (!ActionInterrupt()) {
             Con.ApplyGravity();
+            Con.AirDrift();
             CurrentActionTime++;
         }
     }
 
     public override bool ActionInterrupt () {
-        if (Con.IsGrounded) {
+        if(Con.GetJumpButton(0) && !Con.GetJumpButton(1)) {
+            Con.currentJump++;
+            Con.ChangeState("Jump");
+            return true;
+        } else if (Con.IsGrounded) {
+            Con.currentJump = 0;
             Con.ChangeState("Idle");
             return true;
         }

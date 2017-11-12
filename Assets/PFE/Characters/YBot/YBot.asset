@@ -30,21 +30,27 @@ MonoBehaviour:
     WalkAcceleration: 0.2
     minWalkSpeed: 3
     WalkSpeed: 5
-    DashInitialVelocity: 3
-    DashRunAcceleration: 0.75
-    DashRunDeceleration: 0.25
+    DashInitialVelocity: 7
+    DashRunAcceleration: 0.7
+    DashRunDeceleration: 0
     DashSpeed: 8
     RunMaxVelo: 9
-    AirSpeed: 1.15
+    AirSpeed: 2
     MaxFallSpeed: 19
     FastFallSpeed: 2.4
-    AirAcceleration: 0.07
-    AirDeceleration: 0.01
-    AirFriction: 0.015
+    AirAcceleration: 0.25
+    AirDeceleration: 0.025
+    AirFriction: 0.0125
     JumpVelo:
-      _serializedValue: 25769803776
+      _serializedValue: 36507222016
+    sHopVelo:
+      _serializedValue: 17179869184
     GroundToAir:
       _serializedValue: 3435973888
+    dJumpMulti:
+      _serializedValue: 3779571200
+    dJumpMomentum:
+      _serializedValue: 4294967296
     MaxJumps: 2
     WallJump: 1
     WallCling: 0
@@ -57,7 +63,7 @@ MonoBehaviour:
     JumpFrameTime: 25
     SoftLandingLag: 2
     HardLandingLag: 4
-    Traction: 0.25
+    Traction: 0.5
     ShieldSize: 9.702
   ExecutionTiming: 0.3
   BlendingDuration: 0.1

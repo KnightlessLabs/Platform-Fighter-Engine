@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TrueSync;
@@ -36,7 +36,7 @@ public class CInput : TrueSyncBehaviour {
 
         //Pass over inputs
         SetTSIs();
-        GameManager.instance.Recorder.RecordInputs(0, new PlayerInputs(LeftStick, TSVector2.zero));
+        GameManager.instance.Recorder.RecordInputs(0, new PlayerInputs(LeftStick, TSVector2.zero, JumpB));
     }
 
     public void SetTSIs () { //Set TrueSyncInputs

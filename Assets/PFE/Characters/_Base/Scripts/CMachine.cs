@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TrueSync;
@@ -30,6 +30,8 @@ public class CMachine : TrueSyncBehaviour {
     public bool IsGrounded = false;
     public FP GroundedCheckDistance = 1;
     public FP CurrentFallSpeed = 0;
+    public int JumpType = 0; //0 = short hop, 1 = full hop
+    public int currentJump = 0;
     #endregion
 
     #region References
@@ -106,6 +108,53 @@ public class CMachine : TrueSyncBehaviour {
         }
     }
 
+    public virtual void AirDrift () {
+        FP tempMax = 0;
+        if (TSMath.Abs(GetLeftStick(0).x) < 0.3) {
+            tempMax = 0;
+        } else { 
+            tempMax = CI.AttributesInfo.AirSpeed * GetLeftStick(0).x;
+        }
+
+        TSVector temp = Rigid.velocity;
+        if (( tempMax < 0 && Rigid.velocity.x < tempMax ) || ( tempMax > 0 && Rigid.velocity.x > tempMax )) {
+            if (temp.x > 0) {
+                temp.x -= CI.AttributesInfo.AirFriction;
+                if (temp.x < 0) {
+                    temp.x = 0;
+                }
+                Rigid.velocity = temp;
+                temp = Rigid.velocity;
+            } else {
+                temp.x += CI.AttributesInfo.AirFriction;
+                if (temp.x > 0) {
+                    temp.x = 0;
+                }
+                Rigid.velocity = temp;
+            }
+        } else if (TSMath.Abs(GetLeftStick(0).x) > 0.3 && ( ( tempMax < 0 && temp.x > tempMax ) || ( tempMax > 0 && temp.x < tempMax ) )) {
+            temp.x += ( CI.AttributesInfo.AirAcceleration * GetLeftStick(0).x ) + ( TSMath.Sign(GetLeftStick(0).x) * CI.AttributesInfo.AirDeceleration );
+            Rigid.velocity = temp;
+        }
+
+
+        if (TSMath.Abs(GetLeftStick(0).x) < 0.3) {
+            if (temp.x > 0) {
+                temp.x -= CI.AttributesInfo.AirFriction;
+                if (temp.x < 0) {
+                    temp.x = 0;
+                }
+                Rigid.velocity = temp;
+            } else {
+                temp.x += CI.AttributesInfo.AirFriction;
+                if (temp.x > 0) {
+                    temp.x = 0;
+                }
+                Rigid.velocity = temp;
+            }
+        }
+    }
+
     public TSVector2 GetLeftStick (int FramesBehind) { //0 = current frame, 1 = last frame, etc...
         if(GameManager.instance.Recorder.Players[PlayerNumber].InputBacktrack.Count-1 > FramesBehind) {
             VCR temp = GameManager.instance.Recorder;
@@ -113,6 +162,16 @@ public class CMachine : TrueSyncBehaviour {
             return temp.Players[PlayerNumber].InputBacktrack[temp.Players[PlayerNumber].InputBacktrack.Count - 1 - FramesBehind].LeftStick;
         } else {
             return new TSVector2(0, 0);
+        }
+    }
+
+    public bool GetJumpButton (int FramesBehind) {
+        if(GameManager.instance.Recorder.Players[PlayerNumber].InputBacktrack.Count-1 > FramesBehind) {
+            VCR temp = GameManager.instance.Recorder;
+
+            return temp.Players[PlayerNumber].InputBacktrack[temp.Players[PlayerNumber].InputBacktrack.Count - 1 - FramesBehind].Jump;
+        } else {
+            return false;
         }
     }
 }

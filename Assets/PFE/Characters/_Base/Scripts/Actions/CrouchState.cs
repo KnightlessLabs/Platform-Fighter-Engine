@@ -19,7 +19,7 @@ public class CrouchState : BaseAction {
     }
 
     public override bool ActionInterrupt () {
-        if (Con.LeftStick.y > GameManager.instance.GInfo.CrouchSensitivity) {
+        if (Con.LeftStick.y >= GameManager.instance.GInfo.CrouchSensitivity) {
             if (Con.FaceDirection == 1) { //Facing right
                 if (Con.LeftStick.x >= 0.83f && Con.GetLeftStick(1).x <= .35f) {
                     Con.ChangeState("Dash");

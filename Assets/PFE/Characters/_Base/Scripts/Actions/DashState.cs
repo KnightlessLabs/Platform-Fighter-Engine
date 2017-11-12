@@ -27,7 +27,7 @@ public class DashState : BaseAction {
                 Con.Rigid.velocity = temp;
             }
 
-            if (CurrentActionTime > 2) {
+             if (CurrentActionTime > 1) {
                 if (TSMath.Abs(Con.LeftStick.x) < 0.3f) {
                     Con.ReduceByTraction(false);
                 } else {
@@ -35,10 +35,10 @@ public class DashState : BaseAction {
                     temp.y = 0;
                     FP tempMax = Con.LeftStick.x * Con.CI.AttributesInfo.DashSpeed;
                     FP tempAcceleration = Con.LeftStick.x * Con.CI.AttributesInfo.DashRunAcceleration;
-
-
                     temp.x += tempAcceleration;
                     Con.Rigid.velocity = temp;
+                    temp = Con.Rigid.velocity;
+
                     if (( tempMax > 0 && temp.x > tempMax ) || ( tempMax < 0 && temp.x < tempMax )) {
                         Con.ReduceByTraction(false);
                         if (( tempMax > 0 && temp.x < tempMax ) || ( tempMax < 0 && temp.x > tempMax )) {

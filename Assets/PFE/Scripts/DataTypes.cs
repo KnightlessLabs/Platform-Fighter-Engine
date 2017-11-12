@@ -70,7 +70,10 @@ public class AttributesHolder {
     public float AirDeceleration;
     public float AirFriction;
     public FP JumpVelo;
+    public FP sHopVelo;
     public FP GroundToAir; //Modifies horizontal velocity when jumping
+    public FP dJumpMulti;
+    public FP dJumpMomentum;
     public int MaxJumps;
     public bool WallJump;
     public bool WallCling;

@@ -33,7 +33,7 @@ public class RunState : BaseAction {
         }else if (Con.CheckForJump()) {
             Con.ChangeState("JumpSquat");
             return true;
-        } else if (TSMath.Abs(Con.LeftStick.x) < .62) {
+        } else if (TSMath.Abs(Con.LeftStick.x) < GameManager.instance.GInfo.DashSensitivity) {
             Con.ChangeState("RunBrake");
             return true;
         } else if (Con.FaceDirection == 1) { //Facing right

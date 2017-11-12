@@ -21,6 +21,10 @@ public class RunTurnState : BaseAction {
             TSVector temp = Con.Rigid.velocity;
             FP tempAcc;
 
+            if (CurrentActionTime == 19) { //On the 5th frame we want to turn around.
+                Con.FaceDirection = -Con.FaceDirection;
+            }
+
             if (CurrentActionTime <= 5 && Con.GetLeftStick(0).x * Con.FaceDirection < -0.3) {
                 tempAcc = (Con.CI.AttributesInfo.DashRunAcceleration - (1 - TSMath.Abs(Con.GetLeftStick(0).x)) * (Con.CI.AttributesInfo.DashRunAcceleration)) * Con.FaceDirection;
                 temp.x -= tempAcc;
@@ -38,10 +42,6 @@ public class RunTurnState : BaseAction {
     }
 
     public override bool ActionInterrupt () {
-        if (CurrentActionTime == 6) { //On the 5th frame we want to turn around.
-            Con.FaceDirection = -Con.FaceDirection;
-        }
-
         if (Con.CheckForJump()) {
             Con.ChangeState("JumpSquat");
             return true;

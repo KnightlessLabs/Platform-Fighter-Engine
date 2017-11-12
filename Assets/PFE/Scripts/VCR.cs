@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TrueSync;
@@ -51,8 +51,9 @@ public class PlayerInputs {
     public bool Attack, Special, Jump, Shield, Grab;
     public bool UpTaunt, DownTaunt, LeftTaunt, RightTaunt;
 
-    public PlayerInputs(TSVector2 LS, TSVector2 RS){
+    public PlayerInputs(TSVector2 LS, TSVector2 RS, bool jump){
         LeftStick = LS;
         RightStick = RS;
+        Jump = jump;
     }
 }
