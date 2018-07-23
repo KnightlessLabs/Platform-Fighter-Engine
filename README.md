@@ -21,3 +21,8 @@ Currently built for Unity 2018.2.0f2.
 ## Wanted Features
 * PlayMaker Support
 * Bolt Support
+
+## Resources
+* [SSBM control stick input-output maps](https://imgur.com/a/2na5b)
+* [SSB Wiki](https://www.ssbwiki.com/)
+* [Melee Light](https://github.com/schmooblidon/meleelight)
