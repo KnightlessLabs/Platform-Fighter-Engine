@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TrueSync;
+
 
 public class StageInfo : MonoBehaviour {
     public static StageInfo Instance;
-    public TSTransform[] SpawnPoints;
+    public Transform[] SpawnPoints;
 
     void Awake () {
         Instance = this;

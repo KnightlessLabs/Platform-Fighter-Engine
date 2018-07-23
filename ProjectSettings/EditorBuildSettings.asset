@@ -6,8 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/PFE/Example/Managers.unity
+    guid: 8245c1c8d058a054c919a56a0e02f90a
+  - enabled: 1
     path: Assets/PFE/Example/MainMenu.unity
     guid: 17914cb7d7667704d9d7fddd3053c2d7
   - enabled: 1
-    path: Assets/PFE/Example/BattleArena.unity
-    guid: 00000000000000000000000000000000
+    path: Assets/PFE/Example/Stages/TrainingStage.unity
+    guid: 5945a847242da354695108cae7fae0d8
+  m_configObjects: {}

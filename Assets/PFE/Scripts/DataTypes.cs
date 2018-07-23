@@ -1,14 +1,67 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TrueSync;
 
+
+#region Game State
 public enum GameState {
     MainMenu, CharacterSelection, InMatch, ResultsScreen
 }
 
 public enum MatchState {
     Countdown, MidMatch, End
+}
+
+public enum MatchType {
+    Training, VS
+}
+#endregion
+
+public struct NetworkedPlayerInputs{
+    public bool Grab, Jump, Attack;
+    public FPVector2 LeftStick, RightStick;
+}
+
+public struct PlayerInputDefinition{
+    public FPVector2 axis;
+    public bool isDown;
+    public bool firstPress;
+    public bool released;
+    public bool usedInBuffer;
+}
+
+public struct LocalPlayerInputs{
+    public PlayerInputDefinition grab, jump, attack, special, shield;
+    public PlayerInputDefinition tauntUp, tauntDown, tauntLeft, tauntRight;
+    public PlayerInputDefinition leftStick, rightStick;
+
+    public LocalPlayerInputs(FPVector2 lStick, FPVector2 rStick, bool Grab, bool Jump, bool Attack, bool Special, bool Shield, bool TauntUp, bool TauntDown,
+            bool TauntLeft, bool TauntRight){
+        leftStick = new PlayerInputDefinition();
+        leftStick.axis = lStick;
+        rightStick = new PlayerInputDefinition();
+        rightStick.axis = rStick;
+
+        grab = new PlayerInputDefinition();
+        grab.isDown = Grab;
+        jump = new PlayerInputDefinition();
+        jump.isDown = Jump;
+        attack = new PlayerInputDefinition();
+        attack.isDown = Attack;
+        special = new PlayerInputDefinition();
+        special.isDown = Special;
+        shield = new PlayerInputDefinition();
+        shield.isDown = Shield;
+
+        tauntUp = new PlayerInputDefinition();
+        tauntUp.isDown = TauntUp;
+        tauntDown = new PlayerInputDefinition();
+        tauntDown.isDown = TauntDown;
+        tauntLeft = new PlayerInputDefinition();
+        tauntLeft.isDown = TauntLeft;
+        tauntRight = new PlayerInputDefinition();
+        tauntRight.isDown = TauntRight;
+    }
 }
 
 public enum CSSPlayerType {
@@ -26,10 +79,6 @@ public enum HurtboxShape {
 //BC = Movement, opposing yellow hitbox cannot pass through, HitCollider = opposing green hitbox can overlap, ThrowCollider = detects opposing throw hurtbox
 public enum CollisionType {
     BodyCollider, HitCollider, ThrowCollider, NoCollider
-}
-
-public class InputInfo {
-
 }
 
 [System.Serializable]
@@ -69,11 +118,11 @@ public class AttributesHolder {
     public float AirAcceleration;
     public float AirDeceleration;
     public float AirFriction;
-    public FP JumpVelo;
-    public FP sHopVelo;
-    public FP GroundToAir; //Modifies horizontal velocity when jumping
-    public FP dJumpMulti;
-    public FP dJumpMomentum;
+    public float JumpVelo;
+    public float sHopVelo;
+    public float GroundToAir; //Modifies horizontal velocity when jumping
+    public float dJumpMulti;
+    public float dJumpMomentum;
     public int MaxJumps;
     public bool WallJump;
     public bool WallCling;

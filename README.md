@@ -1,4 +1,23 @@
 # Platform-Fighter-Engine
-WIP engine in Unity. Has the ability to create a game similar to Smash Bros.
+WIP engine in Unity. Goal is to be able to create games similar to the 'smash bros' series.  
+Currently built for Unity 2018.2.0f2.
 
-Currently built for Unity 2017.1.0f3, but with some tweaks can work on other versions below it. The key thing you need are playables, which are avaliable for 5.x in the experimental namespace.
+## Upcoming Features
+* Online Support (via LLAPI implementation)
+	* Rollback with delay settings (similar to GGPO)
+* 3 Example Characters & 3 Example Stages
+* Team Battles
+* Replay Mode
+* Training Mode
+	* Hitbox and Attack Data
+	* Save States
+	* Play/Record Features, Playback Mode
+	* Input Display
+	* Slow Motion
+	* Health, Meter, and Character Settings
+	* Infinite Block
+* InControl/ReWired/cInput 2 support
+
+## Wanted Features
+* PlayMaker Support
+* Bolt Support
