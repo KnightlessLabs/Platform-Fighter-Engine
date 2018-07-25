@@ -26,3 +26,8 @@ Currently built for Unity 2018.2.0f2.
 * [SSBM control stick input-output maps](https://imgur.com/a/2na5b)
 * [SSB Wiki](https://www.ssbwiki.com/)
 * [Melee Light](https://github.com/schmooblidon/meleelight)
+* Smash Researcher twitters
+	* https://twitter.com/BenArthur_7
+	* https://twitter.com/drafix570
+	* https://twitter.com/Ruben_dal
+	* https://twitter.com/Meshima_
