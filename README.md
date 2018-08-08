@@ -30,4 +30,4 @@ Currently built for Unity 2018.2.0f2.
 	* https://twitter.com/BenArthur_7
 	* https://twitter.com/drafix570
 	* https://twitter.com/Ruben_dal
-	* (https://twitter.com/Meshima_)[https://twitter.com/Meshima_]
+	* [https://twitter.com/Meshima_](https://twitter.com/Meshima_)
