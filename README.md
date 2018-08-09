@@ -37,10 +37,7 @@ Currently built for Unity 2018.2.2f1.
 	* https://twitter.com/drafix570
 	* https://twitter.com/Ruben_dal
 	* [https://twitter.com/Meshima_](https://twitter.com/Meshima_)
-
+	
 ## Current Issues
 * Inability to have multiple controllers on CSS
 	* This is a problem with Unity's EventSystem/UI itself, and isn't really something in the scope of this project. Your best bet is to try [this UI replacement out](https://bitbucket.org/chris_drain/unity-ui/overview).
-	
-
-
