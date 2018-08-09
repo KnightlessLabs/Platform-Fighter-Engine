@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GSBehavior : MonoBehaviour, IGSBehavior {
+namespace PFE.Core {
+    public class GSBehavior : MonoBehaviour, IGSBehavior {
         public GameStepManager Lsm {
             get {
                 return GameStepManager.instance;
@@ -34,4 +35,5 @@ public class GSBehavior : MonoBehaviour, IGSBehavior {
         public virtual void GSLateUpdate() {
 
         }
+    }
 }

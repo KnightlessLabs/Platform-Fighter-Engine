@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IGSBehavior{
+namespace PFE.Core {
+    public interface IGSBehavior {
         GameStepManager Lsm { get; }
 
         void GSAwake();
         void GSStart();
         void GSUpdate();
         void GSLateUpdate();
+    }
 }

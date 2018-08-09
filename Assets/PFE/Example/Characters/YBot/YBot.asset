@@ -3,7 +3,7 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -11,60 +11,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 025daff0ff297b64c814d373a4e55650, type: 3}
   m_Name: YBot
   m_EditorClassIdentifier: 
-  Name: YBot
-  BigPortrait: {fileID: 21300000, guid: f9c4598604c81bb43ac317b6a5b4fa97, type: 3}
-  SmallPortrait: {fileID: 0}
-  CSSPortrait: {fileID: 0}
-  StockIcon: {fileID: 0}
-  HealthPoints: 0
-  MaxMeter: 0
-  Costumes:
-  - {fileID: 1844315744262230, guid: 5134eeb097c59b145836866280c08397, type: 2}
-  HurtboxSetupInfo:
-    TypeofHurtboxes: 1
+  characterName: YBot
+  bigPortrait: {fileID: 0}
+  smallPortrait: {fileID: 0}
+  CSSPortrait: {fileID: 21300000, guid: 2900269439cadbf40ab1e82c78700c8d, type: 3}
+  stockIcon: {fileID: 0}
+  healthPoints: 0
+  maxMeter: 0
+  prefab: {fileID: 1342133144128100, guid: 959b7e521b274a2438ec582b6c62e658, type: 2}
+  costumes:
+  - {fileID: 100004, guid: 931ea695f4ebed0408e85dfc2da64ea6, type: 3}
+  portraits: []
+  hurtboxSetupInfo:
+    TypeofHurtboxes: 0
     Hurtboxes: []
-  AttributesInfo:
-    Weight: 100
-    Gravity: 3
-    WalkInitialVelocity: 1
-    WalkAcceleration: 0.2
-    minWalkSpeed: 3
-    WalkSpeed: 5
-    DashInitialVelocity: 7
-    DashRunAcceleration: 0.7
-    DashRunDeceleration: 0
-    DashSpeed: 8
-    RunMaxVelo: 9
-    AirSpeed: 2
-    MaxFallSpeed: 19
-    FastFallSpeed: 2.4
-    AirAcceleration: 0.25
-    AirDeceleration: 0.025
-    AirFriction: 0.0125
-    JumpVelo:
-      _serializedValue: 36507222016
-    sHopVelo:
-      _serializedValue: 17179869184
-    GroundToAir:
-      _serializedValue: 3435973888
-    dJumpMulti:
-      _serializedValue: 3779571200
-    dJumpMomentum:
-      _serializedValue: 4294967296
-    MaxJumps: 2
-    WallJump: 1
-    WallCling: 0
-    Crouch: 0
-    Crawl: 0
-    Tether: 0
-    DashDanceWindow: 18
-    DashFrames: 18
-    JumpSquat: 5
-    JumpFrameTime: 25
-    SoftLandingLag: 2
-    HardLandingLag: 4
-    Traction: 0.5
-    ShieldSize: 9.702
+  attributes:
+    weight: 0
+    gravity: 0
+    walkInitialVelocity: 0
+    walkAcceleration: 0
+    minWalkSpeed: 0
+    walkSpeed: 0
+    dashInitialVelocity: 0
+    dashRunAcceleration: 0
+    dashRunDeceleration: 0
+    dashSpeed: 0
+    runMaxVelo: 0
+    airSpeed: 0
+    maxFallSpeed: 0
+    fastFallSpeed: 0
+    airAcceleration: 0
+    airDeceleration: 0
+    airFriction: 0
+    jumpVelo: 0
+    sHopVelo: 0
+    groundToAir: 0
+    dJumpMulti: 0
+    dJumpMomentum: 0
+    maxJumps: 0
+    wallJump: 0
+    wallCling: 0
+    crouch: 0
+    crawl: 0
+    tether: 0
+    dashDanceWindow: 0
+    dashFrames: 0
+    jumpSquat: 0
+    jumpFrameTime: 0
+    softLandingLag: 0
+    hardLandingLag: 0
+    traction: 0
+    shieldSize: 0
   ExecutionTiming: 0.3
   BlendingDuration: 0.1
   CombatStances:

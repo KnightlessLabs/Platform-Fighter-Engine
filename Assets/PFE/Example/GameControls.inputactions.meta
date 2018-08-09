@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2343c7304457e22439c2005652815a8b
+ScriptedImporter:
+  fileIDToRecycleName:
+    11400000: <root>
+    11400002: Gameplay/Attack
+    11400004: Gameplay/LeftStick
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: e2fdc6edf8744b38b702a2a5ee3541b2, type: 3}
+  generateWrapperCode: 1
+  wrapperCodePath: 
+  wrapperClassName: 
+  wrapperCodeNamespace: 

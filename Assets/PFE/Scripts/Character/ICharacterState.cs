@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
-
-namespace GameSource.Character {
+﻿namespace PFE.Character {
     public interface ICharacterState {
         void OnStart();
         void OnUpdate();
+        void OnLateUpdate();
         bool CheckInterrupt();
         void OnInterrupted();
         string StateName { get; }
