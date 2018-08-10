@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using PFE.Core;
+using PFE.Helpers;
+using FixedPointy;
 
 namespace PFE.Character {
     public class CharController : MonoBehaviour {
@@ -12,28 +14,25 @@ namespace PFE.Character {
         public GameManager cacheGM;
         [HideInInspector]
         public CharInput cInput;
+        [HideInInspector]
+        public Rigidbody2D rBody;
+        [HideInInspector]
+        public GameObject topBone;
+        [HideInInspector]
+        public GameObject bottomBone;
         [Header("References")]
         public GameObject visualRoot;
-        public Rigidbody2D rBody;
         public PolygonCollider2D ecb;
         public ContactFilter2D ecbFilter;
         public ContactFilter2D isGroundedFilter;
         public CharacterInfo cInfo;
         public int selectedCostume;
-        [HideInInspector]
-        public GameObject topBone;
-        [HideInInspector]
-        public GameObject bottomBone;
 
         [Header("Variables")]
         public string ecbTopBone;
         public string ecbBottomBone;
         public KEnergies kineticEnergies;
-        public int hitStop;
-        public int hitStun;
-        public bool applyGravity = true;
-        public bool facingRight = true;
-        public bool isGrounded = true;
+        public CharacterVariables vars;
         #region States
         public Dictionary<string, ICharacterState> stateDictionary = new Dictionary<string, ICharacterState>();
         [SerializeField]
@@ -43,10 +42,15 @@ namespace PFE.Character {
         public int stateCurrentTime = 0;
         #endregion
 
-        private void Awake() {
+        public virtual void Awake() {
+            #region References
             cacheTransform = GetComponent<Transform>();
             cInput = GetComponent<CharInput>();
+            rBody = GetComponent<Rigidbody2D>();
             cacheGM = GameManager.instance;
+            #endregion
+            
+            #region ECB Setup
             GameObject gg = Instantiate(cInfo.costumes[selectedCostume], visualRoot.transform, false);
             if (!string.IsNullOrEmpty(ecbBottomBone)) {
                 bottomBone = gg.transform.FindDeepChild(ecbBottomBone).gameObject;
@@ -54,28 +58,37 @@ namespace PFE.Character {
             if (!string.IsNullOrEmpty(ecbTopBone)) {
                 topBone = gg.transform.FindDeepChild(ecbTopBone).gameObject;
             }
+            #endregion
 
+            #region States
             //States
             CharIdleState cis = new CharIdleState();
-            cis.cInput = cInput;
-            cis.cController = this;
+            cis.Setup(cInput, this);
             stateDictionary.Add(cis.StateName, cis);
+
+            CharWalkState cws = new CharWalkState();
+            cws.Setup(cInput, this);
+            stateDictionary.Add(cws.StateName, cws);
 
             currentState = stateDictionary[cis.StateName];
             currentState.OnStart();
+            cState = cis.StateName;
+            #endregion
+
+            vars.facingRight = true;
         }
 
         public virtual void CCUpdate() {
-            if(hitStop > 0) {
-                hitStop--;
+            if(vars.hitStop > 0) {
+                vars.hitStop--;
                 return;
             }
 
-            isGrounded = IsGroundedCheck();
-            if (isGrounded) {
-                kineticEnergies.gravity.y = 0;
+            vars.isGrounded = IsGroundedCheck();
+            if (vars.isGrounded) {
+                kineticEnergies.gravity = FixVec2.Zero;
             }
-            if (applyGravity) {
+            if (vars.applyGravity) {
                 HandleGravity();
             }
 
@@ -84,6 +97,7 @@ namespace PFE.Character {
             }
 
             UpdateECB();
+            HandleCharacerPushback();
         }
 
         public virtual void CCLateUpdate() {
@@ -116,11 +130,41 @@ namespace PFE.Character {
         }
 
         #region Forces
-        public void HandleGravity() {
+        public virtual void ApplyTraction() {
+            if(kineticEnergies.horizontal.X == Fix.Zero) {
+                return;
+            }
 
+            bool startedDir = FixMath.Sign(kineticEnergies.horizontal.X) == 1 ? true : false;
+            if (startedDir) {
+                kineticEnergies.horizontal._x -= cInfo.attributes.traction;
+                if (kineticEnergies.horizontal.X < Fix.Zero) {
+                    kineticEnergies.horizontal = FixVec2.Zero;
+                }
+            } else {
+                kineticEnergies.horizontal._x += cInfo.attributes.traction;
+                if(kineticEnergies.horizontal.X > Fix.Zero) {
+                    kineticEnergies.horizontal = FixVec2.Zero;
+                }
+            }
         }
 
-        public void HandleCharacerPushback() {
+        public virtual void HandleGravity() {
+            if (!vars.isGrounded) {
+                kineticEnergies.gravity += new FixVec2(0, cInfo.attributes.gravity);
+                if ((kineticEnergies.gravity.Y) < (cInfo.attributes.maxFallSpeed) ){
+                    kineticEnergies.gravity =  new FixVec2(0, cInfo.attributes.maxFallSpeed);
+                }
+            }
+        }
+
+        public virtual void HandleForces() {
+            KEnergies ke = kineticEnergies;
+            Vector2 overall = (Vector2)(ke.gravity + ke.damage + ke.horizontal + ke.movingPlatforms + ke.opponentPushback + ke.secondaryMovement + ke.wind);
+            rBody.velocity = overall;
+        }
+
+        public virtual void HandleCharacerPushback() {
             Collider2D[] results = new Collider2D[3];
             Physics2D.OverlapCollider(ecb, ecbFilter, results);
 
@@ -138,37 +182,34 @@ namespace PFE.Character {
                 }
             }
             if(closestResultIndex == -1) {
+                kineticEnergies.opponentPushback = FixVec2.Zero;
                 return;
             }
 
             //Pushback
-            Vector2 pushDir = Mathf.Sign(results[closestResultIndex].bounds.center.x - ecb.bounds.center.x) == 1 ? Vector2.right : Vector2.left;
-        }
-
-        public bool IsGroundedCheck() {
-            Collider2D[] results = new Collider2D[1];
-            Physics2D.OverlapCollider(ecb, isGroundedFilter, results);
-
-            if(results[0] != null) {
-                return true;
-            } else {
-                return false;
-            }
+            Vector2 pushDir = Mathf.Sign(results[closestResultIndex].bounds.center.x - ecb.bounds.center.x) == 1 ? Vector2.left : Vector2.right;
+            kineticEnergies.opponentPushback = (FixVec2)pushDir*cacheGM.gameInfo.ecbPushback;
         }
         #endregion
 
         #region Checks
-        public bool CheckForAttack() {
+        public virtual bool CheckForAttack() {
             if (cInput.Attack().firstPress) {
                 return true;
             }
             return false;
         }
 
-        public void ApplyForces() {
-            KEnergies ke = kineticEnergies;
-            Vector2 overall = ke.gravity+ke.damage+ke.horizontal+ke.movingPlatforms+ke.opponentPushback+ke.secondaryMovement+ke.wind;
-            rBody.velocity = overall;
+        public virtual bool IsGroundedCheck() {
+            Collider2D[] results = new Collider2D[1];
+            Vector3 tm = ecb.points[2];
+            Physics2D.OverlapPoint(transform.TransformPoint(tm + new Vector3(0, 0.899f, 0)), isGroundedFilter, results);
+
+            if (results[0] != null) {
+                return true;
+            } else {
+                return false;
+            }
         }
         #endregion
     }

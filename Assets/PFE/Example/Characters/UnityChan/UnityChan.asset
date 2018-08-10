@@ -27,19 +27,19 @@ MonoBehaviour:
     Hurtboxes: []
   attributes:
     weight: 0
-    gravity: 0
+    gravity: 0.08715
     walkInitialVelocity: 0
     walkAcceleration: 0
     minWalkSpeed: 0
-    walkSpeed: 0
+    walkSpeed: 1.1
     dashInitialVelocity: 0
     dashRunAcceleration: 0
     dashRunDeceleration: 0
     dashSpeed: 0
     runMaxVelo: 0
     airSpeed: 0
-    maxFallSpeed: 0
-    fastFallSpeed: 0
+    maxFallSpeed: 1.5
+    fastFallSpeed: 2.4
     airAcceleration: 0
     airDeceleration: 0
     airFriction: 0

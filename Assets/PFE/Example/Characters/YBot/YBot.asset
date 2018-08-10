@@ -26,28 +26,50 @@ MonoBehaviour:
     TypeofHurtboxes: 0
     Hurtboxes: []
   attributes:
-    weight: 0
-    gravity: 0
-    walkInitialVelocity: 0
-    walkAcceleration: 0
-    minWalkSpeed: 0
-    walkSpeed: 0
-    dashInitialVelocity: 0
-    dashRunAcceleration: 0
-    dashRunDeceleration: 0
-    dashSpeed: 0
-    runMaxVelo: 0
-    airSpeed: 0
-    maxFallSpeed: 0
-    fastFallSpeed: 0
-    airAcceleration: 0
-    airDeceleration: 0
-    airFriction: 0
-    jumpVelo: 0
-    sHopVelo: 0
-    groundToAir: 0
-    dJumpMulti: 0
-    dJumpMomentum: 0
+    weight:
+      _raw: 0
+    gravity:
+      _raw: -13107
+    walkInitialVelocity:
+      _raw: 32768
+    walkAcceleration:
+      _raw: 6553
+    minWalkSpeed:
+      _raw: 0
+    walkSpeed:
+      _raw: 196608
+    dashInitialVelocity:
+      _raw: 0
+    dashRunAcceleration:
+      _raw: 0
+    dashRunDeceleration:
+      _raw: 0
+    dashSpeed:
+      _raw: 0
+    runMaxVelo:
+      _raw: 0
+    airSpeed:
+      _raw: 0
+    maxFallSpeed:
+      _raw: -688128
+    fastFallSpeed:
+      _raw: 0
+    airAcceleration:
+      _raw: 0
+    airDeceleration:
+      _raw: 0
+    airFriction:
+      _raw: 0
+    jumpVelo:
+      _raw: 0
+    sHopVelo:
+      _raw: 0
+    groundToAir:
+      _raw: 0
+    dJumpMulti:
+      _raw: 0
+    dJumpMomentum:
+      _raw: 0
     maxJumps: 0
     wallJump: 0
     wallCling: 0
@@ -56,286 +78,13 @@ MonoBehaviour:
     tether: 0
     dashDanceWindow: 0
     dashFrames: 0
-    jumpSquat: 0
+    jumpSquat: 4
     jumpFrameTime: 0
-    softLandingLag: 0
-    hardLandingLag: 0
-    traction: 0
-    shieldSize: 0
+    softLandingLag: 2
+    hardLandingLag: 4
+    traction:
+      _raw: 6553
+    shieldSize:
+      _raw: 0
   ExecutionTiming: 0.3
   BlendingDuration: 0.1
-  CombatStances:
-  - BasicMoves:
-      Idle:
-        Animation: {fileID: 7400000, guid: de0008035448e6d42b46e3e380e20ee1, type: 3}
-        AnimationSpeed: 1
-        WMode: 2
-        BlendInDuration: -1
-        BlendOutDuration: -1
-        IdleClips:
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        IdleChangeInterval: 10
-        IdleClipsFoldout: 0
-        AutoSync: 1
-        BSFoldout: 0
-      Walk:
-        Animation: {fileID: 7400000, guid: 5e6dbf5e81cff75408abca6a27f7822d, type: 3}
-        AnimationSpeed: 1
-        WMode: 2
-        BlendInDuration: -1
-        BlendOutDuration: -1
-        IdleClips:
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        IdleChangeInterval: 10
-        IdleClipsFoldout: 0
-        AutoSync: 1
-        BSFoldout: 0
-      Dash:
-        Animation: {fileID: 7400000, guid: 3ef71da1275b71b4c8a5324473799a65, type: 3}
-        AnimationSpeed: 1
-        WMode: 0
-        BlendInDuration: -1
-        BlendOutDuration: -1
-        IdleClips:
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        IdleChangeInterval: 10
-        IdleClipsFoldout: 0
-        AutoSync: 1
-        BSFoldout: 0
-      Run:
-        Animation: {fileID: 7400000, guid: 26055e26f15260e4e8e0e51f50c41926, type: 3}
-        AnimationSpeed: 1
-        WMode: 0
-        BlendInDuration: -1
-        BlendOutDuration: -1
-        IdleClips:
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        IdleChangeInterval: 10
-        IdleClipsFoldout: 0
-        AutoSync: 1
-        BSFoldout: 0
-      RunBrake:
-        Animation: {fileID: 0}
-        AnimationSpeed: 1
-        WMode: 0
-        BlendInDuration: -1
-        BlendOutDuration: -1
-        IdleClips:
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        IdleChangeInterval: 10
-        IdleClipsFoldout: 0
-        AutoSync: 1
-        BSFoldout: 0
-      Turn:
-        Animation: {fileID: 7400000, guid: 944952ce34d139d44ac9d818926b2240, type: 3}
-        AnimationSpeed: 1
-        WMode: 0
-        BlendInDuration: -1
-        BlendOutDuration: -1
-        IdleClips:
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        IdleChangeInterval: 10
-        IdleClipsFoldout: 0
-        AutoSync: 1
-        BSFoldout: 0
-      RunTurn:
-        Animation: {fileID: 0}
-        AnimationSpeed: 1
-        WMode: 0
-        BlendInDuration: -1
-        BlendOutDuration: -1
-        IdleClips:
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        IdleChangeInterval: 10
-        IdleClipsFoldout: 0
-        AutoSync: 1
-        BSFoldout: 0
-      Crouch:
-        Animation: {fileID: 7400000, guid: ded64b05ee8be034aa916a3d9830883d, type: 3}
-        AnimationSpeed: 1
-        WMode: 0
-        BlendInDuration: -1
-        BlendOutDuration: -1
-        IdleClips:
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        IdleChangeInterval: 10
-        IdleClipsFoldout: 0
-        AutoSync: 1
-        BSFoldout: 0
-      Jumpsquat:
-        Animation: {fileID: 7400002, guid: 381ce097fd1dd054da561bce7c8621ee, type: 3}
-        AnimationSpeed: 1
-        WMode: 0
-        BlendInDuration: -1
-        BlendOutDuration: -1
-        IdleClips:
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        IdleChangeInterval: 10
-        IdleClipsFoldout: 0
-        AutoSync: 1
-        BSFoldout: 0
-      JumpStraight:
-        Animation: {fileID: 7400000, guid: 381ce097fd1dd054da561bce7c8621ee, type: 3}
-        AnimationSpeed: 1
-        WMode: 0
-        BlendInDuration: -1
-        BlendOutDuration: -1
-        IdleClips:
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        IdleChangeInterval: 10
-        IdleClipsFoldout: 0
-        AutoSync: 1
-        BSFoldout: 0
-      JumpBack:
-        Animation: {fileID: 0}
-        AnimationSpeed: 1
-        WMode: 0
-        BlendInDuration: -1
-        BlendOutDuration: -1
-        IdleClips:
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        IdleChangeInterval: 10
-        IdleClipsFoldout: 0
-        AutoSync: 1
-        BSFoldout: 0
-      JumpForward:
-        Animation: {fileID: 0}
-        AnimationSpeed: 1
-        WMode: 0
-        BlendInDuration: -1
-        BlendOutDuration: -1
-        IdleClips:
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        IdleChangeInterval: 10
-        IdleClipsFoldout: 0
-        AutoSync: 1
-        BSFoldout: 0
-      FallStraight:
-        Animation: {fileID: 7400004, guid: 381ce097fd1dd054da561bce7c8621ee, type: 3}
-        AnimationSpeed: 1
-        WMode: 0
-        BlendInDuration: -1
-        BlendOutDuration: -1
-        IdleClips:
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        IdleChangeInterval: 10
-        IdleClipsFoldout: 0
-        AutoSync: 1
-        BSFoldout: 0
-      FallBack:
-        Animation: {fileID: 0}
-        AnimationSpeed: 1
-        WMode: 0
-        BlendInDuration: -1
-        BlendOutDuration: -1
-        IdleClips:
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        IdleChangeInterval: 10
-        IdleClipsFoldout: 0
-        AutoSync: 1
-        BSFoldout: 0
-      FallForward:
-        Animation: {fileID: 0}
-        AnimationSpeed: 1
-        WMode: 0
-        BlendInDuration: -1
-        BlendOutDuration: -1
-        IdleClips:
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        IdleChangeInterval: 10
-        IdleClipsFoldout: 0
-        AutoSync: 1
-        BSFoldout: 0
-      Landing:
-        Animation: {fileID: 0}
-        AnimationSpeed: 1
-        WMode: 0
-        BlendInDuration: -1
-        BlendOutDuration: -1
-        IdleClips:
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        IdleChangeInterval: 10
-        IdleClipsFoldout: 0
-        AutoSync: 1
-        BSFoldout: 0
-      GuardPose:
-        Animation: {fileID: 0}
-        AnimationSpeed: 1
-        WMode: 0
-        BlendInDuration: -1
-        BlendOutDuration: -1
-        IdleClips:
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        IdleChangeInterval: 10
-        IdleClipsFoldout: 0
-        AutoSync: 1
-        BSFoldout: 0
-    BasicMovesFoldout: 1

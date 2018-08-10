@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FixedPointy;
 
 namespace PFE {
     [CreateAssetMenu(menuName = "PFE/GameInfo", order = 1)]
@@ -8,16 +9,16 @@ namespace PFE {
         #region Input Deadzones
         [Header("Input Deadzones")]
         public int bufferWindow = 10; //In frames
-        public float walkSensitivity = .25f;
-        public float turnSensitivity = .29f;
-        public float dashSensitivity = .83f;
-        public float crouchSensitivity = .64f;
-        public float jumpSensitivity = .66f;
-        public float deadzone = 0.1f;
+        public Fix walkSensitivity; //.25f
+        public Fix turnSensitivity; //.29f
+        public Fix dashSensitivity; //.83f
+        public Fix crouchSensitivity; //.64f
+        public Fix jumpSensitivity; //.66f
+        public Fix deadzone; //.1f
         #endregion
 
         [Header("Collsion")]
-        public float ecbPushback = 0.34f; //Pushback per frame
+        public Fix ecbPushback; //Pushback per frame, .34f
 
         [Header("Info")]
         public CharacterInfo[] characters;

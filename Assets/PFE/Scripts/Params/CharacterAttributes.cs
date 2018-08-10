@@ -1,27 +1,29 @@
-﻿[System.Serializable]
+﻿using FixedPointy;
+
+[System.Serializable]
 public class CharacterAttributes {
-    public int weight;
-    public float gravity;
-    public float walkInitialVelocity;
-    public float walkAcceleration;
-    public float minWalkSpeed;
-    public float walkSpeed;
-    public float dashInitialVelocity;
-    public float dashRunAcceleration;
-    public float dashRunDeceleration;
-    public float dashSpeed; //Max velocity
-    public float runMaxVelo; //Max velocity
-    public float airSpeed; //Max velocity
-    public float maxFallSpeed;
-    public float fastFallSpeed;
-    public float airAcceleration;
-    public float airDeceleration;
-    public float airFriction;
-    public float jumpVelo;
-    public float sHopVelo;
-    public float groundToAir; //Modifies horizontal velocity when jumping
-    public float dJumpMulti;
-    public float dJumpMomentum;
+    public Fix weight;
+    public Fix gravity;
+    public Fix walkInitialVelocity;
+    public Fix walkAcceleration;
+    public Fix minWalkSpeed;
+    public Fix walkSpeed;
+    public Fix dashInitialVelocity;
+    public Fix dashRunAcceleration;
+    public Fix dashRunDeceleration;
+    public Fix dashSpeed; //Max velocity
+    public Fix runMaxVelo; //Max velocity
+    public Fix airSpeed; //Max velocity
+    public Fix maxFallSpeed;
+    public Fix fastFallSpeed;
+    public Fix airAcceleration;
+    public Fix airDeceleration;
+    public Fix airFriction;
+    public Fix jumpVelo;
+    public Fix sHopVelo;
+    public Fix groundToAir; //Modifies horizontal velocity when jumping
+    public Fix dJumpMulti;
+    public Fix dJumpMomentum;
     public int maxJumps;
     public bool wallJump;
     public bool wallCling;
@@ -34,6 +36,6 @@ public class CharacterAttributes {
     public int jumpFrameTime; //Length of the up part of the jump (in frames)
     public int softLandingLag;
     public int hardLandingLag;
-    public float traction;
-    public float shieldSize;
+    public Fix traction;
+    public Fix shieldSize;
 }

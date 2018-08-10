@@ -12,13 +12,20 @@ MonoBehaviour:
   m_Name: GameInfo
   m_EditorClassIdentifier: 
   bufferWindow: 10
-  walkSensitivity: 0.18
-  turnSensitivity: 0.25
-  dashSensitivity: 0.83
-  crouchSensitivity: -0.66
-  jumpSensitivity: 0.66
-  deadzone: 0.1
-  ecbPushback: 0.34
+  walkSensitivity:
+    _raw: 16384
+  turnSensitivity:
+    _raw: 19005
+  dashSensitivity:
+    _raw: 54394
+  crouchSensitivity:
+    _raw: 41943
+  jumpSensitivity:
+    _raw: 43253
+  deadzone:
+    _raw: 6553
+  ecbPushback:
+    _raw: 26214
   characters:
   - {fileID: 11400000, guid: 3d1997be2097edc468b10b5369f3f4c1, type: 2}
   - {fileID: 11400000, guid: 53497a7db274a064ea81098ddfbc06de, type: 2}

@@ -15,5 +15,5 @@ namespace PFE.Core {
 
 [System.Serializable]
 public class PlayersInputHolder {
-    public List<LocalPlayerInputs> InputBacktrack = new List<LocalPlayerInputs>();
+    //public List<LocalPlayerInputs> InputBacktrack = new List<LocalPlayerInputs>();
 }

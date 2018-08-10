@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FixedPointy;
 
 namespace PFE.Character {
     public class CharIdleState : ICharacterState {
@@ -37,12 +38,14 @@ namespace PFE.Character {
         public CharController cController;
 
         public void OnStart() {
-            cController.applyGravity = true;
+            cController.vars.applyGravity = true;
         }
 
         public void OnUpdate() {
             if (!CheckInterrupt()) {
-                cController.ApplyForces();
+                cController.ApplyTraction();
+
+                cController.HandleForces();
             }
         }
 
@@ -53,10 +56,9 @@ namespace PFE.Character {
         public bool CheckInterrupt() {
             GameInfo gi = cController.cacheGM.gameInfo;
             if (cController.CheckForAttack()) {
-                Debug.Log("Attack");
                 return true;
-            } else if (Mathf.Abs((float)cInput.LeftStick().axis.x) > gi.walkSensitivity) {
-                Debug.Log("Walk");
+            } else if (FixMath.Abs(cInput.LeftStick().axis.X) >= gi.walkSensitivity) {
+                cController.ChangeState("Walk");
                 return true;
             }
             return false;
@@ -64,6 +66,11 @@ namespace PFE.Character {
 
         public void OnInterrupted() {
 
+        }
+
+        public void Setup(CharInput cInput, CharController cCon) {
+            this.cInput = cInput;
+            cController = cCon;
         }
     }
 }

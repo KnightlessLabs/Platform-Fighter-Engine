@@ -96,9 +96,9 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 0, y: 1}
-      - {x: -0.5, y: 0}
+      - {x: -0.3, y: 0}
       - {x: 0, y: -1}
-      - {x: 0.5, y: 0}
+      - {x: 0.3, y: 0}
 --- !u!114 &114331035803144456
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -115,10 +115,8 @@ MonoBehaviour:
     m_Asset: {fileID: 11400000, guid: 2343c7304457e22439c2005652815a8b, type: 3}
   isCPU: 0
   localInputRecord: []
-  tempPI:
-    Grab: 0
-    Jump: 0
-    Attack: 0
+  inputDelay: 0
+  debug: 0
 --- !u!114 &114590359486322220
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -133,18 +131,35 @@ MonoBehaviour:
   cacheTransform: {fileID: 0}
   cacheGM: {fileID: 0}
   cInput: {fileID: 0}
+  rBody: {fileID: 0}
+  topBone: {fileID: 0}
+  bottomBone: {fileID: 0}
   visualRoot: {fileID: 1717400906893606}
   ecb: {fileID: 60993340678003586}
   ecbFilter:
     useTriggers: 0
-    useLayerMask: 0
+    useLayerMask: 1
     useDepth: 0
     useOutsideDepth: 0
     useNormalAngle: 0
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 256
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  isGroundedFilter:
+    useTriggers: 0
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 512
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0
@@ -153,9 +168,47 @@ MonoBehaviour:
   selectedCostume: 0
   ecbTopBone: 
   ecbBottomBone: 
-  hitStop: 0
-  hitStun: 0
-  applyGravity: 1
-  facingRight: 1
+  kineticEnergies:
+    gravity:
+      _x:
+        _raw: 0
+      _y:
+        _raw: 0
+    horizontal:
+      _x:
+        _raw: 0
+      _y:
+        _raw: 0
+    damage:
+      _x:
+        _raw: 0
+      _y:
+        _raw: 0
+    wind:
+      _x:
+        _raw: 0
+      _y:
+        _raw: 0
+    movingPlatforms:
+      _x:
+        _raw: 0
+      _y:
+        _raw: 0
+    opponentPushback:
+      _x:
+        _raw: 0
+      _y:
+        _raw: 0
+    secondaryMovement:
+      _x:
+        _raw: 0
+      _y:
+        _raw: 0
+  vars:
+    hitStun: 0
+    hitStop: 0
+    applyGravity: 0
+    facingRight: 0
+    isGrounded: 0
   cState: 
   stateCurrentTime: 0

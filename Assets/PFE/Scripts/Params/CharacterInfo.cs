@@ -25,6 +25,6 @@ namespace PFE {
         //Movesets
         public float ExecutionTiming = 0.3f;
         public float BlendingDuration = 0.1f;
-        public List<CombatStanceHolder> CombatStances = new List<CombatStanceHolder>();
+        public List<CombatStance> CombatStances = new List<CombatStance>();
     }
 }

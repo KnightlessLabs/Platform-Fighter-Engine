@@ -4,7 +4,7 @@ using UnityEngine;
 using PFE.Character;
 using PFE.Core;
 
-namespace PFE {
+namespace PFE.Core {
     public class MatchManager : MonoBehaviour {
         public MatchState matchState;
         public bool VCR = false;

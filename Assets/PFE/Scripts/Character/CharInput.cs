@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using PFE.Core;
 using UnityEngine.Experimental.Input;
-using UnityEngine.Experimental.Input.Controls;
-using UnityEngine.Experimental.Input.LowLevel;
+using FixedPointy;
 
 namespace PFE.Character {
     public class CharInput : GSBehavior {
 
         [Header("References")]
         public CharController charController;
-        public GameControls gControls;
 
         [Header("Variables")]
         public bool isCPU;
         public List<PlayerInputs> localInputRecord = new List<PlayerInputs>();
+        public int inputDelay = 3;
+        public bool debug = false;
 
         public override void GSAwake() {
             base.GSAwake();
@@ -39,9 +39,13 @@ namespace PFE.Character {
             var gamepad = Gamepad.current;
             PlayerInputs pi = new PlayerInputs();
             if (gamepad != null) {
-                pi.LeftStick.x = (FPValue)gamepad.leftStick.ReadValue().x;
-                pi.LeftStick.y = (FPValue)gamepad.leftStick.ReadValue().y;
+                Vector2 lS = gamepad.leftStick.ReadValue();
+                pi.LeftStick = new FixVec2((Fix)lS.x, (Fix)lS.y);
                 pi.Attack = gamepad.buttonSouth.ReadValue() == 1 ? true : false;
+
+                if (debug) {
+                    Debug.Log(((float)pi.LeftStick.X).ToString());
+                }
             }
             localInputRecord.Add(pi);
         }
@@ -49,28 +53,25 @@ namespace PFE.Character {
         #region Inputs
         public virtual PlayerInputDefinition LeftStick() {
             PlayerInputDefinition pid = new PlayerInputDefinition();
-            if (localInputRecord.Count == 0) {
+            if (localInputRecord.Count == 0 || localInputRecord.Count-1-inputDelay < 0) {
                 return pid;
             } else {
-                pid.axis.x = localInputRecord[localInputRecord.Count - 1].LeftStick.x;
-                pid.axis.y = localInputRecord[localInputRecord.Count - 1].LeftStick.y;
+                pid.axis = localInputRecord[localInputRecord.Count - 1-inputDelay].LeftStick;
                 return pid;
             }
         }
 
         public virtual PlayerInputDefinition Attack() {
             PlayerInputDefinition pid = new PlayerInputDefinition();
-            if(localInputRecord.Count == 0) {
+            if (localInputRecord.Count == 0 || localInputRecord.Count - 2 - inputDelay < 0) {
                 return pid;
             } else {
-                if (localInputRecord.Count >= 2) {
-                    if (!localInputRecord[localInputRecord.Count - 2].Attack) {
-                        //First press
-                        pid.firstPress = localInputRecord[localInputRecord.Count - 1].Attack;
-                    }
+                if (!localInputRecord[localInputRecord.Count - 2 - inputDelay].Attack) {
+                    //First press
+                    pid.firstPress = localInputRecord[localInputRecord.Count - 1 - inputDelay].Attack;
                 }
-                return pid;
             }
+            return pid;
         }
         #endregion
     }
