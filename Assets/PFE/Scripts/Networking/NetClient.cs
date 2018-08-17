@@ -30,8 +30,10 @@ namespace PFE.Networking {
             connectionTime = Time.time;
 
             if (error != 0) {
-                OnDisconnectFromHost();
-                //GameManager.instance.errorList.text += "Network Error: " + (NetworkError)error + "\n";
+                if (OnDisconnectFromHost != null){
+                    OnDisconnectFromHost();
+                }
+                Debug.Log((NetworkError)error);
                 Destroy(this);
             }
         }
@@ -61,7 +63,9 @@ namespace PFE.Networking {
                 case NetworkEventType.ConnectEvent:    //2
                     isConnected = true;
                     Debug.Log("Connected to host.");
-                    OnConnectToHost();
+                    if (OnConnectToHost != null) {
+                        OnConnectToHost();
+                    }
                     break;
                 case NetworkEventType.DataEvent:       //3
                     string msg = Encoding.Unicode.GetString(recBuffer, 0, dataSize);
@@ -70,7 +74,9 @@ namespace PFE.Networking {
                 case NetworkEventType.DisconnectEvent: //4
                     Debug.Log("Disconnected from host.");
                     isConnected = false;
-                    OnDisconnectFromHost();
+                    if (OnDisconnectFromHost != null) {
+                        OnDisconnectFromHost();
+                    }
                     Destroy(this);
                     break;
             }

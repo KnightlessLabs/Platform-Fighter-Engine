@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 114038055263212344}
   - component: {fileID: 114319386957882232}
   - component: {fileID: 114790823434046204}
+  - component: {fileID: 114908327723423890}
   m_Layer: 5
   m_Name: CSelectIcon
   m_TagString: Untagged
@@ -306,6 +307,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114908327723423890
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1334637034552004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91bc10fda959de242a7b57154e78f768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterIndex: 0
 --- !u!222 &222218365317239334
 CanvasRenderer:
   m_ObjectHideFlags: 1

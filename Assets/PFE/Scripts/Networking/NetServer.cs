@@ -11,6 +11,8 @@ namespace PFE.Networking {
 
         public delegate void StartHostingAction();
         public static event StartHostingAction OnStartHosting;
+        public delegate void StopHostingAction();
+        public static event StopHostingAction OnStopHosting;
 
         #region Connecting
         public void StartHosting(ConnectionConfig cc, int maxPlayersPerRoom, out int socketId, out int webSocketId, int socketPort) {
@@ -33,6 +35,9 @@ namespace PFE.Networking {
 
         public void StopHosting() {
             Debug.Log("Stopped hosting.");
+            if (OnStopHosting != null) {
+                OnStopHosting();
+            }
             NetworkTransport.RemoveHost(NetManager.instance.socketId);
             NetworkTransport.RemoveHost(NetManager.instance.webSocketId);
             NetworkTransport.Shutdown();

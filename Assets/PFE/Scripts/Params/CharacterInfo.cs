@@ -19,12 +19,6 @@ namespace PFE {
         public List<GameObject> costumes = new List<GameObject>();
         public List<GameObject> portraits = new List<GameObject>();
 
-        public HurtboxSetupHolder hurtboxSetupInfo;
         public CharacterAttributes attributes;
-
-        //Movesets
-        public float ExecutionTiming = 0.3f;
-        public float BlendingDuration = 0.1f;
-        public List<CombatStance> CombatStances = new List<CombatStance>();
     }
 }

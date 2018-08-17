@@ -23,5 +23,8 @@ namespace PFE {
         [Header("Info")]
         public CharacterInfo[] characters;
         public StageInfo[] stages;
+
+        [Header("UI")]
+        public float cursorSpeed = 300;
     }
 }

@@ -12,13 +12,18 @@ namespace PFE.Core {
 
         #region References
         public static GameManager instance;
+        [HideInInspector]
+        public MatchManager matchManager;
+        [HideInInspector]
+        public VCR Recorder;
+
         [Header("References")]
+        public NetworkType networkType;
         public GameState gameState;
         public GameModeEnum gameMode;
-        public MatchManager matchManager;
-        public VCR Recorder;
         public CanvasGroupFader loadingScreenCG;
         //Character Select
+        [Header("Character Select")]
         public GameObject cSelectScreenGO;
         public Transform cSelectCharactersHolder;
         public GameObject cSelectCharacterPrefab;
@@ -26,6 +31,7 @@ namespace PFE.Core {
         public GameObject[] cSelectPositions;
         public int selectingFor = 0;
         //Stage Select
+        [Header("Stage Select")]
         public GameObject sSelectScreenGO;
         public GameObject sSelectStageHolder;
         public GameObject sSelectStagePrefab;
@@ -38,59 +44,45 @@ namespace PFE.Core {
         #region Events
         public delegate void FinishedSceneLoadAction();
         public event FinishedSceneLoadAction OnSceneFinishedLoading;
+        public delegate void CharacterSelectOpenedAction();
+        public event CharacterSelectOpenedAction OnCharacterSelectOpened;
         #endregion
 
-        void Awake() {
+        public virtual void Awake() {
             if (instance == null) {
                 instance = this;
             } else if (instance != this) {
                 Destroy(gameObject);
             }
+
+            matchManager = GetComponent<MatchManager>();
+            Recorder = GetComponent<VCR>();
         }
 
         #region Character Select
         public void OpenCharacterSelect() {
             cSelectScreenGO.SetActive(true);
             cSelectCamera.SetActive(true);
+
+            //Cleanup CSS
             foreach(Transform t in cSelectCharactersHolder) {
                 Destroy(t.gameObject);
             }
 
+            //Build CSS
             for(int i = 0; i < gameInfo.characters.Length; i++) {
                 CharacterInfo ci = gameInfo.characters[i];
                 GameObject go = Instantiate(cSelectCharacterPrefab, cSelectCharactersHolder, false);
                 if(ci.CSSPortrait != null) {
                     go.GetComponent<Image>().sprite = ci.CSSPortrait;
                     go.GetComponentInChildren<TextMeshProUGUI>().text = ci.characterName;
-                }
-
-                int ind = i;
-                EventTrigger et = go.GetComponent<EventTrigger>();
-                EventTrigger.Entry entryT = new EventTrigger.Entry();
-                entryT.eventID = EventTriggerType.Submit;
-                entryT.callback.AddListener((eventData) => { OnSelectCharacter(ind); });
-                et.triggers.Add(entryT);
-
-                EventTrigger.Entry entryCl = new EventTrigger.Entry();
-                entryCl.eventID = EventTriggerType.PointerClick;
-                entryCl.callback.AddListener((eventData) => { OnSelectCharacter(ind); });
-                et.triggers.Add(entryCl);
-
-                if ((i+1) == Mathf.Ceil((float)(gameInfo.characters.Length) / 2.0f)) {
-                    EventSystem.current.SetSelectedGameObject(go);
+                    go.GetComponent<CSSCharacterIcon>().characterIndex = i;
                 }
             }
-        }
 
-        public void OnSelectCharacter(int index) {
-            if(matchManager.playerCharacters.Count < 2) {
-                matchManager.playerCharacters.Add(gameInfo.characters[index]);
-                GameObject go = GameObject.Instantiate(gameInfo.characters[index].costumes[0], cSelectPositions[selectingFor].transform, false);
-                go.transform.eulerAngles = new Vector3(0, 180, 0);
-                selectingFor++;
-                if(selectingFor == 2) {
-                    OpenStageSelect();
-                }
+            gameState = GameState.CharacterSelection;
+            if (OnCharacterSelectOpened != null) {
+                OnCharacterSelectOpened();
             }
         }
         #endregion
@@ -101,10 +93,12 @@ namespace PFE.Core {
             cSelectScreenGO.SetActive(false);
             cSelectCamera.SetActive(false);
 
+            //Cleanup
             foreach(Transform t in sSelectStageHolder.transform) {
                 Destroy(t.gameObject);
             }
 
+            //Create SSS
             for(int i = 0; i < gameInfo.stages.Length; i++) {
                 GameObject go = Instantiate(sSelectStagePrefab, sSelectStageHolder.transform, false);
 
@@ -123,36 +117,44 @@ namespace PFE.Core {
         }
         #endregion
 
-        public void StartMatch(StageInfo sI) {
-            for(int i = 0; i < cSelectPositions.Length; i++) {
-                foreach (Transform t in cSelectPositions[i].transform) {
-                    Destroy(t.gameObject);
-                }
-            }
-
-            matchManager.stageInfo = sI;
-            OnSceneFinishedLoading += matchManager.StartMatch;
-            sSelectScreenGO.SetActive(false);
-            LoadScene(sI.stageSceneName);
-        }
-
+        #region Scene Loading
         public void LoadScene(string SceneName) {
             StartCoroutine(LoadSceneEnumerator(SceneName));
         }
 
         IEnumerator LoadSceneEnumerator(string SceneName) {
             loadingScreenCG.FadeOut(2);
-            AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+            if (SceneManager.sceneCount > 1) {
+                //Only unload if there's more than 1 scene currently loaded.
+                AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+            }
             AsyncOperation async = SceneManager.LoadSceneAsync(SceneName, LoadSceneMode.Additive);
 
             while (!async.isDone) {
                 yield return null;
             }
+
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(SceneName));
             if (OnSceneFinishedLoading != null) {
                 OnSceneFinishedLoading();
             }
             loadingScreenCG.FadeIn(1);
+        }
+        #endregion
+
+        public void StartMatch(StageInfo sI) {
+            //Delete pedestal characters
+            for (int i = 0; i < cSelectPositions.Length; i++) {
+                foreach (Transform t in cSelectPositions[i].transform) {
+                    Destroy(t.gameObject);
+                }
+            }
+
+            //Setup MatchManager
+            matchManager.stageInfo = sI;
+            OnSceneFinishedLoading += matchManager.StartMatch;
+            sSelectScreenGO.SetActive(false);
+            LoadScene(sI.stageSceneName);
         }
     }
 }

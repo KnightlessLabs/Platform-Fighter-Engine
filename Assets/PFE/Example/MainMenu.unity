@@ -1718,7 +1718,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1518491000}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1849476457}
+        m_MethodName: MMJoinLobby
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &1557411479
@@ -1840,7 +1851,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 821
 --- !u!114 &1849476454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1913,6 +1924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainMenuGO: {fileID: 1442959881}
+  onlineDropdownGO: {fileID: 1850552969}
   defaultSelection: {fileID: 598131509}
 --- !u!1 &1850552969
 GameObject:

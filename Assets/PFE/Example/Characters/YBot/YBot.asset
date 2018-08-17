@@ -20,7 +20,7 @@ MonoBehaviour:
   maxMeter: 0
   prefab: {fileID: 1342133144128100, guid: 959b7e521b274a2438ec582b6c62e658, type: 2}
   costumes:
-  - {fileID: 100004, guid: 931ea695f4ebed0408e85dfc2da64ea6, type: 3}
+  - {fileID: 100004, guid: 39af56a1f76396140b8b1f632f2cae4d, type: 3}
   portraits: []
   hurtboxSetupInfo:
     TypeofHurtboxes: 0

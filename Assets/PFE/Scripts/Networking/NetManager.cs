@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using TMPro;
 
 namespace PFE.Networking {
     public class NetManager : MonoBehaviour {
@@ -31,18 +32,18 @@ namespace PFE.Networking {
         [HideInInspector]
         public NetClient networkClient;
 
-        private void Awake() {
+        public virtual void Awake() {
             instance = this;
         }
 
-        public void InitNetworking() {
+        public virtual void InitNetworking() {
             NetworkTransport.Init(networkConfiguration);
             connectionConfig.Channels.Clear();
             reliableChannel = connectionConfig.AddChannel(QosType.Reliable);
             unreliableChannel = connectionConfig.AddChannel(QosType.Unreliable);
         }
 
-        public void StartHosting() {
+        public virtual void StartHosting() {
             if (networkServer == null) {
                 InitNetworking();
 
@@ -53,7 +54,7 @@ namespace PFE.Networking {
             }
         }
 
-        public void ConnectToHost(string ipAdress) {
+        public virtual void ConnectToHost(string ipAdress) {
             if (networkClient == null) {
                 InitNetworking();
 

@@ -16,6 +16,10 @@ namespace PFE {
     public enum MatchState {
         Countdown, MidMatch, End
     }
+
+    public enum NetworkType {
+        Offline, Online
+    }
     #endregion
 
     #region Variables
@@ -56,6 +60,16 @@ namespace PFE {
     }
     #endregion
 
+    public enum PlayerType {
+        None, Player, CPU
+    }
+
+    [System.Serializable]
+    public class PlayerDefinition {
+        public PlayerType playerType;
+        public CharacterInfo selectedChar;
+    }
+
     public enum HurtboxType {
         TwoD, ThreeD
     }
@@ -69,25 +83,4 @@ namespace PFE {
         BodyCollider, HitCollider, ThrowCollider, NoCollider
     }
 
-    [System.Serializable]
-    public class HurtboxSetupHolder {
-        public HurtboxType TypeofHurtboxes;
-        public List<HurtboxInfo> Hurtboxes = new List<HurtboxInfo>();
-    }
-
-    [System.Serializable]
-    public class HurtboxInfo {
-        public HurtboxShape Shape;
-        public Vector3 Size;
-        public Vector3 Offset;
-        public CollisionType CollisionT;
-
-        //3D
-        public Transform BoneLinkedTo; //The reference to the bone it's linked to
-        public string BoneLinkedToName; //The bone this hitbox is linked to
-    }
-
-    public class CombatStance {
-
-    }
 }
