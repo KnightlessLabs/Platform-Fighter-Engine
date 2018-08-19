@@ -1,8 +1,9 @@
 # Platform-Fighter-Framework
 ## Overview
-WIP framework in Unity. Goal is to be able to create games similar to the **Super Smash Bros** series.  
-Currently built for Unity 2018.2.2f1. Currently these packages are in use.
-* [Unity's new Input System](https://github.com/Unity-Technologies/InputSystem) (Can be ignored, only used for the example project)
+WIP framework in Unity. Goal is to be able to create games similar to the **Super Smash Bros** series. Please check the wiki on setup and how to use it.  
+
+Uses Unity 2018.2.4f1. Currently these packages are in use:
+* [Unity's new Input System](https://github.com/Unity-Technologies/InputSystem) (Used by the example project)
 * TextMeshPro
 * Post-Processing
 
@@ -24,11 +25,11 @@ Currently built for Unity 2018.2.2f1. Currently these packages are in use.
 	* Slow Motion
 	* Health, Meter, and Character Settings
 	* Infinite Block
-* InControl/ReWired/cInput 2 support
 
 ## Wanted Features
 * PlayMaker Support
 * Bolt Support
+* InControl/ReWired/cInput 2 default Support
 
 ## Resources
 * [SSBM control stick input-output maps](https://imgur.com/a/2na5b)
