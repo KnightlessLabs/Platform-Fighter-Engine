@@ -11,6 +11,7 @@ Uses Unity 2018.2.4f1. Currently these packages are in use:
 * [Twitter](https://twitter.com/christides11)
 
 ## Upcoming Features
+* InControl/ReWired/cInput 2 default Support
 * Online Support (via LLAPI implementation)
 	* Rollback with delay settings (similar to GGPO)
 * 3 Example Characters & 3 Example Stages
@@ -29,7 +30,6 @@ Uses Unity 2018.2.4f1. Currently these packages are in use:
 ## Wanted Features
 * PlayMaker Support
 * Bolt Support
-* InControl/ReWired/cInput 2 default Support
 
 ## Resources
 * [SSBM control stick input-output maps](https://imgur.com/a/2na5b)
