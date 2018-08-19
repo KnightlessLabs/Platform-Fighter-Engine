@@ -1,4 +1,4 @@
-# Platform-Fighter-Engine
+# Platform-Fighter-Framework
 ## Overview
 WIP framework in Unity. Goal is to be able to create games similar to the **Super Smash Bros** series.  
 Currently built for Unity 2018.2.2f1. Currently these packages are in use.
