@@ -26,6 +26,7 @@ Uses Unity 2018.2.4f1. Currently these packages are in use:
 	* Slow Motion
 	* Health, Meter, and Character Settings
 	* Infinite Block
+* Items
 
 ## Wanted Features
 * PlayMaker Support
